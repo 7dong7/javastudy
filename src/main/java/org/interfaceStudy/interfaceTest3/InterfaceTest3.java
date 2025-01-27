@@ -39,6 +39,3 @@ class A {
         System.out.println(i.toString());
     }
 }
-
-
-
