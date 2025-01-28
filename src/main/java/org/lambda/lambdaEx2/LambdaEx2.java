@@ -55,6 +55,14 @@ public class LambdaEx2 {
             System.out.println(dataForm.username + " " + dataForm.email + " " + dataForm.name);
         });
 
+        dataFormList.removeIf(dataForm ->
+            dataForm.username.equals("username1")
+        );
+        dataFormList.forEach( dataForm -> {
+            System.out.println(dataForm.username + " " + dataForm.email + " " + dataForm.name);
+        });
+
+
     }
 }
 
