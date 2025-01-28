@@ -2,6 +2,7 @@ package org.lambda.lambdaEx2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LambdaEx2 {
@@ -37,5 +38,30 @@ public class LambdaEx2 {
         // 맵 안의 요소를 { k,v } 형태로 출력
         System.out.println("맵 안의 요소를 {k,v} 형태로 출력");
         map.forEach( (k,v) -> System.out.println( "{" + k + "," + v + "}"));
+        System.out.println();
+        
+        // dataForm 을 사용한 람다식 활용
+        System.out.println("dataForm 을 사용한 람다식 활용");
+        List<dataForm> dataFormList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            dataForm dataForm = new dataForm();
+            dataForm.email = "email" + i;
+            dataForm.name = "name" + i;
+            dataForm.username = "username" + i;
+            dataFormList.add(dataForm);
+        }
+
+        dataFormList.forEach( dataForm -> {
+            System.out.println(dataForm.username + " " + dataForm.email + " " + dataForm.name);
+        });
+
     }
+}
+
+class dataForm {
+
+    String name;
+    String username;
+    String email;
+    
 }
