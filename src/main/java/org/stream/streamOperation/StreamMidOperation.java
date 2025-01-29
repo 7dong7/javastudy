@@ -1,6 +1,8 @@
 package org.stream.streamOperation;
 
+import java.util.Comparator;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StreamMidOperation {
     public static void main(String[] args) {
@@ -26,5 +28,26 @@ public class StreamMidOperation {
         System.out.println();
         // 정렬 - sorted()
         System.out.println("======== sorted() ========");
+        Stream<String> strStream = Stream.of("dd","aaa","CC", "cc", "b");
+        // 기본적인 정렬 
+//        strStream.sorted().forEach(System.out::println); // 기본정렬 사전순 정렬로 정렬
+//        strStream.sorted(Comparator.naturalOrder()).forEach(System.out::print);
+//        strStream.sorted((s1, s2) -> s1.compareTo(s2)).forEach(System.out::print); // 람다식 사용
+//        strStream.sorted(String::compareTo).forEach(System.out::print); // 메소드 참조
+        // CCaaabccdd
+
+//        strStream.sorted(Comparator.reverseOrder()).forEach(System.out::print);
+        // ddccbaaaCC
+
+//        strStream.sorted(String.CASE_INSENSITIVE_ORDER).forEach(System.out::print); // 대소문자 구분안함
+        // aaabCCccdd
+//        strStream.sorted(String.CASE_INSENSITIVE_ORDER.reversed()).forEach(System.out::print); // 대소문자 구분안함 반대로
+        // ddCCccbaaa
+
+        strStream.sorted(Comparator.comparing(String::length)).forEach(System.out::print); // 길이 순 정렬
+        // bddCCccaaa
+
+        
+        
     }
 }
