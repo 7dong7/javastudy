@@ -1,6 +1,7 @@
 package org.stream.streamTrans;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 public class StreamTrans {
@@ -32,5 +33,32 @@ public class StreamTrans {
                 .peek(s -> System.out.printf("extension=%s%n", s))
                 .forEach(System.out::println);              // 출력
 
+        System.out.println();
+        // === flatMap() 사용 ===
+        Stream<String[]> strArrStream = Stream.of(new String[]{"abc", "def", "ghi"},
+                                                new String[]{"ABC", "GHI", "JKLMN"});
+
+//        Stream<Stream<String>> streamStream = strArrStream.map(x -> Arrays.stream(x));
+//        Stream<String> stringStream = strArrStream.flatMap(x -> Arrays.stream(x));
+
+        String[] lineArr = {"Belive or not It is true", "Do or do not There is no try",};
+        Stream<String> lineStream = Arrays.stream(lineArr);
+        Stream<String> strStream = lineStream.flatMap(line -> Stream.of(line.split(" ")));
+//        stringStream1.forEach(System.out::println);
+
+        strStream.map(String::toLowerCase)
+                .distinct()
+                .sorted()
+                .forEach(System.out::println);
+
+        System.out.println();
+        Stream<String> strStream1 = Stream.of("AAA", "ABC", "bBb", "Dd");
+        Stream<String> strStream2 = Stream.of("bbb", "aaa", "ccc", "dd");
+        Stream<Stream<String>> strStrmStrm = Stream.of(strStream1, strStream2);
+        Stream<String> stringStream = strStrmStrm.map(x -> x.toArray(String[]::new))
+                                                 .flatMap(Arrays::stream);
+        stringStream.map(String::toLowerCase)
+                .distinct()
+                .forEach(System.out::println);
     }
 }
