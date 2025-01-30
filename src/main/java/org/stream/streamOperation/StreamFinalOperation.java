@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.joining;
+
 public class StreamFinalOperation {
     public static void main(String[] args) {
 
@@ -82,6 +85,30 @@ public class StreamFinalOperation {
         // 객체 -> map 으로 변환
         Map<Integer, String> studentMap = studentList.stream()
                 .collect(Collectors.toMap(Student::getId, Student::getName)); // p -> p.getId(), p -> p.getName()
+
+
+
+        System.out.println();
+        // ========= 통계 =========
+        long count = studentList.stream()
+                .count();
+        /* studentList.size() */
+        System.out.println("count = " + count);
+        Long count2 = studentList.stream().collect(counting()); // static import
+        System.out.println("count2 = " + count2);
+
+
+        System.out.println();
+        // ========= 문자열 결합 =========
+        String collect = studentList.stream()
+                .map(s -> s.getName())
+                .collect(joining(", "));
+        System.out.println("collect = " + collect); // collect = 김김김, 박박박, 이이이
+
+        String collect1 = studentList.stream()
+                .map(s -> s.getName())
+                .collect(joining(", ", "[", "]"));
+        System.out.println("collect1 = " + collect1); // [김김김, 박박박, 이이이]
 
     }
 }
