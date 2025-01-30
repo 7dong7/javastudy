@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.joining;
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.*;
 
 public class StreamFinalOperation {
     public static void main(String[] args) {
@@ -110,6 +110,110 @@ public class StreamFinalOperation {
                 .collect(joining(", ", "[", "]"));
         System.out.println("collect1 = " + collect1); // [김김김, 박박박, 이이이]
 
+
+
+        System.out.println();
+        // ========== 그릅화와 분할 ===========
+        List<Stu> stuList = Arrays.asList(
+                new Stu("나자바", true, 1, 1, 300),
+                new Stu("김자바", true, 2, 1, 200),
+                new Stu("박자박", false, 3, 1, 100),
+                new Stu("박자남", false, 1, 2, 130),
+                new Stu("근대용", true, 2, 2, 330),
+
+                new Stu("몰라용", false, 3, 2, 257),
+                new Stu("안해요", false, 1, 3, 215),
+                new Stu("이지미", true, 2, 3, 195),
+                new Stu("나지미", true, 3, 3, 132),
+                new Stu("오지미", false, 1, 3, 300),
+
+                new Stu("김자바", true, 2, 3, 220),
+                new Stu("박자바", false, 3, 3, 90)
+        );
+        // partitioningBy 분류
+            // 1. 기본분할
+        Map<Boolean, List<Stu>> collect2 = stuList.stream()
+                .collect(partitioningBy(x -> x.isMale));
+
+        List<Stu> stus = collect2.get(true);
+        List<Stu> stus2 = collect2.get(false);
+        System.out.println("남학생");
+        for (Stu stu : stus) {
+            System.out.println("stu = " + stu);
+        }
+        System.out.println("여학생");
+        for (Stu stu : stus2) {
+            System.out.println("stu = " + stu);
+        }
+
+            // 2. 기본분할 + 통계 정보
+                // 성별 수
+        Map<Boolean, Long> collect3 = stuList.stream()
+                .collect(partitioningBy(Stu::isMale, counting()));
+        System.out.println("남학생 수 = " + collect3.get(true));
+        System.out.println("여학생 수 = " + collect3.get(false));
+                // 성별 1등
+        Map<Boolean, Optional<Stu>> topScoreBySex = stuList.stream()
+                .collect(partitioningBy(Stu::isMale,
+                        maxBy(comparingInt(x -> x.getScore())))
+                );
+        System.out.println("남학색 1등 = " + topScoreBySex.get(true));
+        System.out.println("여학생 1등 = " + topScoreBySex.get(false));
+                // 성적이 150 아래인 사람 불합격, 불합격자를 성별로 분류
+        Map<Boolean, Map<Boolean, List<Stu>>> failedStuBySex = stuList.stream()
+                .collect(
+                        partitioningBy(Stu::isMale,
+                                partitioningBy(s -> s.getScore() < 150)
+                        )
+                );
+        List<Stu> failedMaleStu = failedStuBySex.get(true).get(true);
+        List<Stu> failedFemaleStu = failedStuBySex.get(false).get(true);
+        System.out.println("failedMaleStu = " + failedMaleStu);
+        System.out.println("failedFemaleStu = " + failedFemaleStu);
+
+        System.out.println();
+        // groupingBy 분류
+            // 학생의 반에 따라서 분류
+        Map<Integer, List<Stu>> banStu = stuList.stream()
+                .collect( groupingBy(Stu::getBan) );// x -> x.getBan() 반으로 분류
+        System.out.println("1반");
+        for (Stu stu : banStu.get(1)) {
+            System.out.println("stu = " + stu);
+        };
+        System.out.println("2반");
+        for (Stu stu : banStu.get(2)) {
+            System.out.println("stu = " + stu);
+        }
+        System.out.println("3반");
+        for (Stu stu : banStu.get(3)) {
+            System.out.println("stu = " + stu);
+        }
+
+            // 학생의 등급에 따라서 학생 수 반환
+        Map<Stu.Level, Long> stuByLevel = stuList.stream()
+                .collect(
+                        groupingBy(s -> {
+                            if (s.getScore() >= 200) return Stu.Level.HIGH;
+                            else if (s.getScore() >= 100) return Stu.Level.MID;
+                            else return Stu.Level.LOW;
+                        }, counting())
+                );
+        System.out.println("stuByLevel = " + stuByLevel);
+        System.out.println();
+        
+            // 학년별로 그룹화, 반별로 그룹화
+        Map<Integer, Map<Integer, List<Stu>>> stuByHakAndBan = stuList.stream()
+                .collect(groupingBy(Stu::getHak,
+                                groupingBy(Stu::getBan)
+                        )
+                );
+        Set<Integer> integers = stuByHakAndBan.keySet();
+        for (Integer integer : integers) {
+            Set<Integer> keys = stuByHakAndBan.get(integer).keySet();
+            for (Integer key : keys) {
+                System.out.println("["+integer+"-"+key+"]"+stuByHakAndBan.get(integer).get(key));
+            }
+        }
     }
 }
 
@@ -177,5 +281,50 @@ class Student {
 
     public int getId() {
         return id;
+    }
+}
+
+class Stu {
+
+    String name;
+    boolean isMale;
+    int hak;
+    int ban;
+    int score;
+
+    public Stu(String name, boolean isMale, int hak, int ban, int score) {
+        this.name = name;
+        this.isMale = isMale;
+        this.hak = hak;
+        this.ban = ban;
+        this.score = score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isMale() {
+        return isMale;
+    }
+
+    public int getHak() {
+        return hak;
+    }
+
+    public int getBan() {
+        return ban;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public String toString() {
+        return String.format("[%s, %s, %d학년, %d반, %3d점]",
+                name, isMale ? "남" : "녀", hak, ban, score);
+    }
+    enum Level {
+        HIGH, MID, LOW
     }
 }
