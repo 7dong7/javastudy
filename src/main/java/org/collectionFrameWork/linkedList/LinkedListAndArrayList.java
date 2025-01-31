@@ -4,7 +4,7 @@ package org.collectionFrameWork.linkedList;
 import java.util.*;
 
 // 링크드 리스트에 대해서
-public class LinkedListStudy {
+public class LinkedListAndArrayList {
     public static void main(String[] args) {
         // 추가할 데이터의 개수를 고려하여 충분히 잡아야한다
         ArrayList<String> al = new ArrayList(2000000);
