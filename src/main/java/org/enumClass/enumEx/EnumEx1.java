@@ -1,4 +1,4 @@
-package org.enumClass.enum1;
+package org.enumClass.enumEx;
 
 // enum 정의
 enum Direction {EAST, SOUTH, WEST, NORTH;}

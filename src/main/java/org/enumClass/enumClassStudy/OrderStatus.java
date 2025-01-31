@@ -1,9 +1,9 @@
-package org.enumClassStudy;
+package org.enumClass.enumClassStudy;
 
-import org.enumClassStudy.orderStatus.DecreaseStockStrategy;
-import org.enumClassStudy.orderStatus.HoldStockStrategy;
-import org.enumClassStudy.orderStatus.RestoreStockStrategy;
-import org.enumClassStudy.orderStatus.StockStrategy;
+import org.enumClass.enumClassStudy.orderStatus.DecreaseStockStrategy;
+import org.enumClass.enumClassStudy.orderStatus.RestoreStockStrategy;
+import org.enumClass.enumClassStudy.orderStatus.HoldStockStrategy;
+import org.enumClass.enumClassStudy.orderStatus.StockStrategy;
 
 public enum OrderStatus {
     ORDERED(new DecreaseStockStrategy()),   // 주문 완료, 재고 감소

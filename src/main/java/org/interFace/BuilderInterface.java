@@ -1,4 +1,4 @@
-package org.interfaceStudy;
+package org.interFace;
 
 public class BuilderInterface {
 

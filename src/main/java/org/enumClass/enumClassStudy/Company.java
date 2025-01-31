@@ -1,4 +1,4 @@
-package org.enumClassStudy;
+package org.enumClass.enumClassStudy;
 
 public enum Company {
     SK("에스케이"),

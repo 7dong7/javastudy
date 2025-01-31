@@ -1,4 +1,4 @@
-package org.enumClassStudy.orderStatus;
+package org.enumClass.enumClassStudy.orderStatus;
 
 public class DecreaseStockStrategy implements StockStrategy{
     

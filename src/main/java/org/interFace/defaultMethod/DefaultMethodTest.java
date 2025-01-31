@@ -1,4 +1,4 @@
-package org.interfaceStudy.defaultMethodTest;
+package org.interFace.defaultMethod;
 
 public class DefaultMethodTest {
     public static void main(String[] args) {

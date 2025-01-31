@@ -1,4 +1,4 @@
-package org.interfaceStudy.interfaceTest;
+package org.interFace.interfaceTest;
 
 // 클래스A 와 클래스B 의 기본적인 상호작용
 public class InterFaceTest {

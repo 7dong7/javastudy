@@ -1,4 +1,4 @@
-package org.interfaceStudy.interfaceTest2;
+package org.interFace.interfaceTest2;
 
 public class InterFaceTest {
     public static void main(String[] args) {

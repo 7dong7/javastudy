@@ -1,4 +1,4 @@
-package org.enumClassStudy;
+package org.enumClass.enumClassStudy;
 
 public enum Day {
     MONDAY("월요일"){
