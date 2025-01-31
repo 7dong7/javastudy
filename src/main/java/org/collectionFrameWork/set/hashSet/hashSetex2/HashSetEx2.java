@@ -1,4 +1,4 @@
-package org.collectionFrameWork.hashSetEx.ex2;
+package org.collectionFrameWork.set.hashSet.hashSetex2;
 
 import java.util.HashSet;
 

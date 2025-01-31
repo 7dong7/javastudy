@@ -1,4 +1,4 @@
-package org.collectionFrameWork.stackAndQueue;
+package org.collectionFrameWork.list.stackAndQueue;
 
 import java.util.Stack;
 

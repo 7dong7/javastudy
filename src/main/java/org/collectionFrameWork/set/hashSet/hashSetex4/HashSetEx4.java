@@ -1,4 +1,4 @@
-package org.collectionFrameWork.hashSetEx.ex4;
+package org.collectionFrameWork.set.hashSet.hashSetex4;
 
 import java.util.HashSet;
 import java.util.Iterator;
