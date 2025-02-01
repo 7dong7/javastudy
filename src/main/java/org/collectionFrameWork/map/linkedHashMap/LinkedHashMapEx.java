@@ -55,6 +55,5 @@ public class LinkedHashMapEx {
         // 모든 항목 삭제
         map.clear();
         System.out.println("map = " + map);
-
     }
 }
