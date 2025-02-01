@@ -2,6 +2,7 @@ package org.collectionFrameWork.set.treeSet.treeSetEx1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.TreeSet;
 
 // tree set 범위 검색
@@ -17,11 +18,11 @@ public class Ex1 {
         System.out.println(set);
         System.out.println("set.subset(4,10): " + set.subSet(4,10) + "\n"); // set.subset(4,10): [4, 5, 6, 7, 8, 9]
 
+        // 해당하는 값보다 작은 값의 객체들과 큰 값의 객체들을 얻을 수 있다
         TreeSet<Integer> set1 = new TreeSet<>();
         Integer[] score = {80, 90, 100, 120, 75, 30, 20, 50};
         set1.addAll(Arrays.asList(score));
 
-        // 해당하는 값보다 작은 값의 객체들과 큰 값의 객체들을 얻을 수 있다
         System.out.println("=== set headSet(), tailSet() ===");
         System.out.println("set1 = " + set1);
         System.out.println("set1.headSet(50) = " + set1.headSet(50)); // [20, 30]
