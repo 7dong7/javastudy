@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class HashMapStudy {
+public class HashMapEx {
     public static void main(String[] args) {
         Map<String, Integer> intMap = new HashMap<>();
         intMap.put("apple", 1000); intMap.put("orange", 2000);
