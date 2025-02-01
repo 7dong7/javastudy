@@ -27,6 +27,5 @@ public class PropertiesEx {
         System.out.println("loadfactor: " + prop.getProperty("loadfactor", "0.75"));
         System.out.println(prop); // prop 에 저장된 요소 출력
         prop.list(System.out); // prop 에 저장된 요소들을 화면에 출력
-
     }
 }
